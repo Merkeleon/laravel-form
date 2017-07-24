@@ -1,0 +1,19 @@
+{
+  "name": "merkeleon/laravel-form",
+  "description": "Form functionality for Laravel",
+  "keywords": ["laravel", "form", "merkeleon"],
+  "license": "MIT",
+  "require": {
+    "php": ">=5.3.0",
+    "laravel/framework": "5.*",
+    "doctrine/dbal": "~2.3"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.5.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Merkeleon\\Form\\": "src/"
+    }
+  }
+}
