@@ -6,7 +6,7 @@
  * Time: 12:55
  */
 
-namespace Merkeleon\Forms\Form;
+namespace Merkeleon\Form\Form;
 
 use Illuminate\Support\HtmlString;
 

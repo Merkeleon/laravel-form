@@ -6,20 +6,17 @@
  * Time: 15:38
  */
 
-namespace Merkeleon\Forms;
+namespace Merkeleon\Form;
 
-use App\Repositories\LanguageRepository;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\HtmlString;
-use Merkeleon\Forms\Form\Element;
-use Merkeleon\Forms\Form\Element\Checkbox;
-use Merkeleon\Forms\Form\Element\Hidden;
-use Merkeleon\Forms\Form\Element\Password;
-use Merkeleon\Forms\Form\Element\Select;
-use Merkeleon\Forms\Form\Element\Text;
-use Merkeleon\Forms\Form\Element\Submit;
-use Merkeleon\Forms\Form\Element\Textarea;
-use Merkeleon\Forms\Form\Element\Multilang;
+use Merkeleon\Form\Form\Element;
+use Merkeleon\Form\Form\Element\Checkbox;
+use Merkeleon\Form\Form\Element\Hidden;
+use Merkeleon\Form\Form\Element\Password;
+use Merkeleon\Form\Form\Element\Select;
+use Merkeleon\Form\Form\Element\Text;
+use Merkeleon\Form\Form\Element\Submit;
+use Merkeleon\Form\Form\Element\Textarea;
 
 class Form
 {
@@ -126,7 +123,7 @@ class Form
     /**
      * @param $name
      * @param string $validators
-     * @return \Merkeleon\Forms\Form\Element\Text
+     * @return \Merkeleon\Form\Form\Element\Text
      */
     public function addElementText($name, $validators = '')
     {
@@ -140,7 +137,7 @@ class Form
     /**
      * @param $name
      * @param string $validators
-     * @return \Merkeleon\Forms\Form\Element\Date
+     * @return \Merkeleon\Form\Form\Element\Date
      */
     public function addElementDate($name, $validators = '')
     {
@@ -154,7 +151,7 @@ class Form
     /**
      * @param $name
      * @param string $validators
-     * @return \Merkeleon\Forms\Form\Element\File
+     * @return \Merkeleon\Form\Form\Element\File
      */
     public function addElementFile($name, $validators = '')
     {
@@ -177,7 +174,7 @@ class Form
     /**
      * @param $name
      * @param string $content
-     * @return \Merkeleon\Forms\Form\Element\Html
+     * @return \Merkeleon\Form\Form\Element\Html
      */
     public function addElementHtml($name, $content = '')
     {
@@ -192,7 +189,7 @@ class Form
     /**
      * @param $name
      * @param string $validators
-     * @return \Merkeleon\Forms\Form\Element\Textarea
+     * @return \Merkeleon\Form\Form\Element\Textarea
      */
     public function addElementTextarea($name, $validators = '')
     {
@@ -206,7 +203,7 @@ class Form
     /**
      * @param $name
      * @param string $validators
-     * @return \Merkeleon\Forms\Form\Element\Hidden
+     * @return \Merkeleon\Form\Form\Element\Hidden
      */
     public function addElementHidden($name, $validators = '')
     {
@@ -220,7 +217,7 @@ class Form
     /**
      * @param $name
      * @param string $validators
-     * @return \Merkeleon\Forms\Form\Element\Checkbox
+     * @return \Merkeleon\Form\Form\Element\Checkbox
      */
     public function addElementCheckbox($name, $validators = '')
     {
@@ -234,7 +231,7 @@ class Form
     /**
      * @param $name
      * @param string $validators
-     * @return \Merkeleon\Forms\Form\Element\CheckboxGroup
+     * @return \Merkeleon\Form\Form\Element\CheckboxGroup
      */
     public function addElementCheckboxGroup($name, $validators = '')
     {
@@ -248,7 +245,7 @@ class Form
     /**
      * @param $name
      * @param string $validators
-     * @return \Merkeleon\Forms\Form\Element\Password
+     * @return \Merkeleon\Form\Form\Element\Password
      */
     public function addElementPassword($name, $validators = '')
     {
@@ -262,7 +259,7 @@ class Form
     /**
      * @param $name
      * @param string $validators
-     * @return \Merkeleon\Forms\Form\Element\Select
+     * @return \Merkeleon\Form\Form\Element\Select
      */
     public function addElementSelect($name, $validators = '')
     {
@@ -277,7 +274,7 @@ class Form
     /**
      * @param $name
      * @param string $validators
-     * @return \Merkeleon\Forms\Form\Element\Radio
+     * @return \Merkeleon\Form\Form\Element\Radio
      */
     public function addElementRadio($name, $validators = '')
     {
@@ -291,7 +288,7 @@ class Form
 
     /**
      * @param string $name
-     * @return \Merkeleon\Forms\Form\Element\Submit
+     * @return \Merkeleon\Form\Form\Element\Submit
      */
     public function addElementSubmit($name = 'submit')
     {

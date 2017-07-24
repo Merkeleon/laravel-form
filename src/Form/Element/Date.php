@@ -6,10 +6,10 @@
  * Time: 11:33
  */
 
-namespace Merkeleon\Forms\Form\Element;
+namespace Merkeleon\Form\Form\Element;
 
 use Carbon\Carbon;
-use Merkeleon\Forms\Form\Element;
+use Merkeleon\Form\Form\Element;
 
 class Date extends Element
 {

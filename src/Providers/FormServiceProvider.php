@@ -1,6 +1,6 @@
 <?php
 
-namespace Merkeleon\Forms\Providers;
+namespace Merkeleon\Form\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

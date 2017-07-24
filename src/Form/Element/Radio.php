@@ -6,10 +6,10 @@
  * Time: 11:33
  */
 
-namespace Merkeleon\Forms\Form\Element;
+namespace Merkeleon\Form\Form\Element;
 
 use Illuminate\Database\Eloquent\Collection;
-use Merkeleon\Forms\Form\Element;
+use Merkeleon\Form\Form\Element;
 
 class Radio extends Element
 {
