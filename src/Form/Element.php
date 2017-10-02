@@ -137,6 +137,11 @@ abstract class Element
         return $this;
     }
 
+    public function getValidators()
+    {
+        return $this->validators;
+    }
+
     public function validate($keys)
     {
         $values = request($keys);
