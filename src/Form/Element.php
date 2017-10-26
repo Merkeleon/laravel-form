@@ -39,7 +39,7 @@ abstract class Element
         $this->value = $oldValue;
         $this->error = null;
         if ($errors = session()->get('errors')) {
-            $this->error = array_get($errors->toArray(), $this->name, '');
+            $this->error = array_get(array_undot($errors->toArray()), $this->name, '');
             if (is_array($this->error)) {
                 $this->error = array_first($this->error);
             }
@@ -149,7 +149,8 @@ abstract class Element
             $this->name => $this->validators
         ]);
         if ($validator->fails()) {
-            $this->error = array_get($validator->errors()->toArray(), $this->name . '.0');
+            $errors = array_undot($validator->errors()->toArray());
+            $this->error = array_get($errors, $this->name . '.0');
             return false;
         }
 

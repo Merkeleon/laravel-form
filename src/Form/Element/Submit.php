@@ -12,7 +12,14 @@ use Merkeleon\Form\Form\Element;
 
 class Submit extends Element
 {
+    protected $buttonClass = 'btn-primary';
     protected $isIgnored = true;
+
+    public function setButtonClass($buttonClass) {
+        $this->buttonClass = $buttonClass;
+
+        return $this;
+    }
 
     public function isClicked() {
         return (bool)$this->value();
@@ -25,6 +32,7 @@ class Submit extends Element
             'name' => $this->name,
             'elementName' => $this->elementName,
             'class' => $this->class,
+            'buttonClass' => $this->buttonClass,
             'attributes' => $this->attributes,
         ]);
     }
