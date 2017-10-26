@@ -16,14 +16,22 @@ class Date extends Element
 
     public function value()
     {
-        return Carbon::parse($this->value);
+        if ($this->value === '') {
+            $value = null;
+        } else {
+            $value = Carbon::parse($this->value, current_timezone())
+                  ->setTimezone('UTC');
+        }
+
+        return $value;
     }
 
     public function setValue($value, $force = false)
     {
         if ($force || !$this->hasOldValue)
         {
-            $this->value = Carbon::parse($value);
+            $this->value = Carbon::parse($value, 'UTC')
+                                 ->setTimezone(current_timezone());
         }
 
         return $this;

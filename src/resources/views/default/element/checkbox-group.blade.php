@@ -1,4 +1,4 @@
-<div class="form__element form__element_type_checkbox-group @if($error) form__element--error @endif {{$class}}">
+<div class="form__element form__element_type_checkbox-group @if($error) form__element_error @endif {{$class}}">
     <label class="form__label">{{ $label }}</label>
     <div class="form__element-container">
         @foreach ($options as $key => $label)
