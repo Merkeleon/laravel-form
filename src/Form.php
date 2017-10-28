@@ -375,12 +375,15 @@ class Form
         return $this->errors;
     }
 
-    public function values()
+    public function values($skipEmptyString = false)
     {
         $data = [];
         foreach ($this->elements as $name => $element) {
             if(!$element->isIgnored()) {
-                array_set($data, $name, $element->value());
+                $value = $element->value();
+                if (!$skipEmptyString || $skipEmptyString && $value !== '') {
+                    array_set($data, $name, $value);
+                }
             }
         }
 
