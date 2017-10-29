@@ -137,6 +137,20 @@ class Form
     /**
      * @param $name
      * @param string $validators
+     * @return \Merkeleon\Form\Form\Element\DateTime
+     */
+    public function addElementDateTime($name, $validators = '')
+    {
+        $element = new Element\DateTime($name, $validators);
+        $element->setTheme($this->theme);
+
+        $this->elements[$name] = $element;
+        return $this->elements[$name];
+    }
+
+    /**
+     * @param $name
+     * @param string $validators
      * @return \Merkeleon\Form\Form\Element\Date
      */
     public function addElementDate($name, $validators = '')
