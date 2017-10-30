@@ -1,17 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: codeator
- * Date: 28.04.16
- * Time: 11:33
- */
 
 namespace Merkeleon\Form\Form\Element;
 
 use Carbon\Carbon;
 use Merkeleon\Form\Form\Element;
 
-class Date extends Element
+class DateTime extends Element
 {
 
     public function value()
@@ -19,7 +13,8 @@ class Date extends Element
         if ($this->value === '') {
             $value = null;
         } else {
-            $value = Carbon::parse($this->value);
+            $value = Carbon::parse($this->value, current_timezone())
+                  ->setTimezone('UTC');
         }
 
         return $value;
@@ -29,15 +24,17 @@ class Date extends Element
     {
         if ($force || !$this->hasOldValue)
         {
-            $this->value = Carbon::parse($value);
+            $this->value = Carbon::parse($value, 'UTC')
+                                 ->setTimezone(current_timezone());
         }
 
         return $this;
     }
 
+
     public function view()
     {
-        $this->addAttributes(['data-toggle' => 'datepicker']);
+        $this->addAttributes(['data-toggle' => 'datetimepicker']);
 
         return view('form::' . $this->theme . '.element.text', [
             'name'        => $this->name,

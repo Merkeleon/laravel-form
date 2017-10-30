@@ -137,6 +137,20 @@ class Form
     /**
      * @param $name
      * @param string $validators
+     * @return \Merkeleon\Form\Form\Element\DateTime
+     */
+    public function addElementDateTime($name, $validators = '')
+    {
+        $element = new Element\DateTime($name, $validators);
+        $element->setTheme($this->theme);
+
+        $this->elements[$name] = $element;
+        return $this->elements[$name];
+    }
+
+    /**
+     * @param $name
+     * @param string $validators
      * @return \Merkeleon\Form\Form\Element\Date
      */
     public function addElementDate($name, $validators = '')
@@ -375,12 +389,15 @@ class Form
         return $this->errors;
     }
 
-    public function values()
+    public function values($skipEmptyString = false)
     {
         $data = [];
         foreach ($this->elements as $name => $element) {
             if(!$element->isIgnored()) {
-                array_set($data, $name, $element->value());
+                $value = $element->value();
+                if (!$skipEmptyString || $skipEmptyString && $value !== '') {
+                    array_set($data, $name, $value);
+                }
             }
         }
 
