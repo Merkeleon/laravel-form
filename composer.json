@@ -19,9 +19,6 @@
     }
   },
   "autoload": {
-    "files": [
-      "src/Support/helpers.php"
-    ],
     "psr-4": {
       "Merkeleon\\Form\\": "src/"
     }
