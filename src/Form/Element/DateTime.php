@@ -13,8 +13,7 @@ class DateTime extends Element
         if ($this->value === '') {
             $value = null;
         } else {
-            $value = Carbon::parse($this->value, current_timezone())
-                  ->setTimezone('UTC');
+            $value = Carbon::parse($this->value);
         }
 
         return $value;
@@ -24,8 +23,7 @@ class DateTime extends Element
     {
         if ($force || !$this->hasOldValue)
         {
-            $this->value = Carbon::parse($value, 'UTC')
-                                 ->setTimezone(current_timezone());
+            $this->value = Carbon::parse($value);
         }
 
         return $this;
