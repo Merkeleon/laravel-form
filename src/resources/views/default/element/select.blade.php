@@ -10,6 +10,7 @@
                         @if (($multiple && $value && in_array((string)$key, $value, true)) || $value === (string)$key) selected="selected" @endif>{{ $option }}</option>
             @endforeach
         </select>
+            <div class="form__help">{{ $help }}</div>
         <div class="form__feedback">{{ $error }}</div>
     </div>
 </div>

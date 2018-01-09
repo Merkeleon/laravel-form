@@ -16,19 +16,21 @@ class Checkbox extends Element
 
     public function view()
     {
-        return view('form::'.$this->theme.'.element.checkbox', [
-            'name' => $this->name,
+        return view('form::' . $this->theme . '.element.checkbox', [
+            'name'        => $this->name,
+            'help'        => $this->help,
             'elementName' => $this->elementName,
-            'error' => $this->error,
-            'label' => $this->label,
-            'checked' => $this->value,
-            'options' => $this->options,
-            'class' => $this->class,
-            'attributes' => $this->attributes
+            'error'       => $this->error,
+            'label'       => $this->label,
+            'checked'     => $this->value,
+            'options'     => $this->options,
+            'class'       => $this->class,
+            'attributes'  => $this->attributes
         ]);
     }
 
-    public function value() {
+    public function value()
+    {
         return $this->value ? 1 : 0;
     }
 }

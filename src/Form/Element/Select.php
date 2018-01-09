@@ -13,11 +13,13 @@ use Merkeleon\Form\Form\Element;
 
 class Select extends Element
 {
-    protected $options = [];
+    protected $options  = [];
     protected $multiple = false;
 
-    public function setOptions($options) {
-        if ($options instanceof Collection) {
+    public function setOptions($options)
+    {
+        if ($options instanceof Collection)
+        {
             $options = $options->getDictionary();
         }
         $this->options = $options;
@@ -25,50 +27,61 @@ class Select extends Element
         return $this;
     }
 
-    public function setMultiple($multiple) {
+    public function setMultiple($multiple)
+    {
         $this->multiple = $multiple;
 
         return $this;
     }
 
-    public function value() {
-        if (!$this->value) {
+    public function value()
+    {
+        if (!$this->value)
+        {
             return null;
         }
 
         return parent::value();
     }
 
-    public function setValue($value, $force = false) {
+    public function setValue($value, $force = false)
+    {
 
-        if (is_array($value)) {
-            foreach ($value as &$v) {
+        if (is_array($value))
+        {
+            foreach ($value as &$v)
+            {
                 $v = (string)$v;
             }
             unset($v);
-        } else {
+        }
+        else
+        {
             $value = (string)$value;
         }
+
         return parent::setValue($value, $force);
     }
 
     public function view()
     {
-        if ($this->multiple && !is_array($this->value)) {
+        if ($this->multiple && !is_array($this->value))
+        {
             $this->value = empty($this->value) ? [] : [$this->value];
         }
 
-        return view('form::'.$this->theme.'.element.select', [
-            'label' => $this->label,
+        return view('form::' . $this->theme . '.element.select', [
+            'label'       => $this->label,
+            'help'        => $this->help,
             'placeholder' => $this->placeholder,
-            'name' => $this->name,
+            'name'        => $this->name,
             'elementName' => $this->elementName,
-            'options' => $this->options,
-            'error' => $this->error,
-            'value' => $this->value,
-            'multiple' => $this->multiple,
-            'class' => $this->class,
-            'attributes' => $this->attributes
+            'options'     => $this->options,
+            'error'       => $this->error,
+            'value'       => $this->value,
+            'multiple'    => $this->multiple,
+            'class'       => $this->class,
+            'attributes'  => $this->attributes
         ]);
     }
 

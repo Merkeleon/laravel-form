@@ -5,6 +5,7 @@
             <input @foreach($attributes as $attributeName => $attributeValue) {{ $attributeName }}="{{ $attributeValue }}" @endforeach type="text" value="{{ array_get($value, 'from') }}" name="{{ $elementName }}[from]" placeholder="{{trans('frontend.form.range.from')}}">
             <input @foreach($attributes as $attributeName => $attributeValue) {{ $attributeName }}="{{ $attributeValue }}" @endforeach type="text" value="{{ array_get($value, 'to') }}" name="{{ $elementName }}[to]" placeholder="{{trans('frontend.form.range.to')}}">
         @endspaceless
+        <div class="form__help">{{ $help }}</div>
         <div class="form__feedback">{{ $error }}</div>
     </div>
 </div>

@@ -2,6 +2,7 @@
     <label class="form__label">{{ $label }}</label>
     <div class="form__element-container">
         <textarea rows="5" @foreach($attributes as $attributeName => $attributeValue) {{ $attributeName }}="{{ $attributeValue }}" @endforeach name="{{ $elementName }}" placeholder="{{ $placeholder }}">{{ $value }}</textarea>
+        <div class="form__help">{{ $help }}</div>
         <div class="form__feedback">{{ $error }}</div>
     </div>
 </div>

@@ -15,13 +15,13 @@ class Hidden extends Element
 
     public function view()
     {
-        return view('form::'.$this->theme.'.element.hidden', [
-            'name' => $this->name,
+        return view('form::' . $this->theme . '.element.hidden', [
+            'name'        => $this->name,
             'elementName' => $this->elementName,
-            'error' => $this->error,
-            'value' => $this->value,
-            'class' => $this->class,
-            'attributes' => $this->attributes
+            'error'       => $this->error,
+            'value'       => $this->value,
+            'class'       => $this->class,
+            'attributes'  => $this->attributes
         ]);
     }
 

@@ -9,5 +9,6 @@
             </label>
         @endforeach
     </div>
+    <div class="form__help">{{ $help }}</div>
     <div class="form__feedback">{{ $error }}</div>
 </div>

@@ -14,15 +14,16 @@ class Password extends Element
 {
     public function view()
     {
-        return view('form::'.$this->theme.'.element.password', [
-            'name' => $this->name,
+        return view('form::' . $this->theme . '.element.password', [
+            'name'        => $this->name,
+            'help'        => $this->help,
             'elementName' => $this->elementName,
-            'error' => $this->error,
-            'label' => $this->label,
+            'error'       => $this->error,
+            'label'       => $this->label,
             'placeholder' => $this->placeholder,
-            'postfix' => $this->postfix,
-            'class' => $this->class,
-            'attributes' => $this->attributes
+            'postfix'     => $this->postfix,
+            'class'       => $this->class,
+            'attributes'  => $this->attributes
         ]);
     }
 

@@ -14,15 +14,16 @@ class Textarea extends Element
 {
     public function view()
     {
-        return view('form::'.$this->theme.'.element.textarea', [
-            'name' => $this->name,
+        return view('form::' . $this->theme . '.element.textarea', [
+            'name'        => $this->name,
+            'help'        => $this->help,
             'elementName' => $this->elementName,
-            'error' => $this->error,
-            'label' => $this->label,
-            'value' => $this->value,
+            'error'       => $this->error,
+            'label'       => $this->label,
+            'value'       => $this->value,
             'placeholder' => $this->placeholder,
-            'class' => $this->class,
-            'attributes' => $this->attributes
+            'class'       => $this->class,
+            'attributes'  => $this->attributes
         ]);
     }
 

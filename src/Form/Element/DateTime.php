@@ -10,9 +10,12 @@ class DateTime extends Element
 
     public function value()
     {
-        if ($this->value === '') {
+        if ($this->value === '')
+        {
             $value = null;
-        } else {
+        }
+        else
+        {
             $value = Carbon::parse($this->value);
         }
 
@@ -36,6 +39,7 @@ class DateTime extends Element
 
         return view('form::' . $this->theme . '.element.text', [
             'name'        => $this->name,
+            'help'        => $this->help,
             'elementName' => $this->elementName,
             'error'       => $this->error,
             'label'       => $this->label,
