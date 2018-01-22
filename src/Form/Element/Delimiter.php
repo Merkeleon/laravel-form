@@ -9,7 +9,8 @@ class Delimiter extends Element
     protected $view;
     protected $data = [];
 
-    public function setContent($view, $data = []) {
+    public function setContent($view, $data = [])
+    {
         $this->view = $view;
         $this->data = $data;
 
@@ -19,12 +20,12 @@ class Delimiter extends Element
     public function view()
     {
         $data = array_merge($this->data, [
-            'name' => $this->name,
+            'name'        => $this->name,
             'elementName' => $this->elementName,
-            'class' => $this->class,
+            'class'       => $this->class,
         ]);
 
-        return view($this->view ?: 'form::'.$this->theme.'.element.delimiter', $data);
+        return view($this->view ?: 'form::' . $this->theme . '.element.delimiter', $data);
     }
 
 }

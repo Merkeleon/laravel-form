@@ -17,41 +17,48 @@ abstract class Element
     protected $theme;
     protected $error;
     protected $value;
+    protected $help;
     protected $label;
     protected $placeholder;
     protected $postfix;
     protected $class;
     protected $attributes = [];
 
-    protected $isIgnored = false;
+    protected $isIgnored   = false;
     protected $hasOldValue = false;
 
     public function __construct($name, $validators = '')
     {
-        $this->name = $name;
+        $this->name        = $name;
         $this->elementName = self::prepareElementName($name);
-        $this->validators = $validators;
-        $oldValue = request()->input($this->name, null);
-        if ($oldValue === null) {
+        $this->validators  = $validators;
+        $oldValue          = request()->input($this->name, null);
+        if ($oldValue === null)
+        {
             $oldValue = request()->old($this->name, null);
         }
         $this->hasOldValue = $oldValue !== null;
-        $this->value = $oldValue;
-        $this->error = null;
-        if ($errors = session()->get('errors')) {
+        $this->value       = $oldValue;
+        $this->error       = null;
+        if ($errors = session()->get('errors'))
+        {
             $this->error = array_get(array_undot($errors->toArray()), $this->name, '');
-            if (is_array($this->error)) {
+            if (is_array($this->error))
+            {
                 $this->error = array_first($this->error);
             }
         }
     }
 
-    public static function prepareElementName($name) {
-        $parts = explode('.', $name);
+    public static function prepareElementName($name)
+    {
+        $parts  = explode('.', $name);
         $result = array_shift($parts);
-        foreach ($parts as $part) {
-            $result .= '['.$part.']';
+        foreach ($parts as $part)
+        {
+            $result .= '[' . $part . ']';
         }
+
         return $result;
     }
 
@@ -82,12 +89,14 @@ abstract class Element
     public function setAttributes($attributes)
     {
         $this->attributes = $attributes;
+
         return $this;
     }
 
     public function addAttributes($attributes)
     {
         $this->attributes = array_merge($this->attributes, $attributes);
+
         return $this;
     }
 
@@ -99,30 +108,42 @@ abstract class Element
     public function setTheme($theme)
     {
         $this->theme = $theme;
+
         return $this;
     }
 
     public function setClass($class)
     {
         $this->class = $class;
+
         return $this;
     }
 
     public function setLabel($label)
     {
         $this->label = $label;
+
+        return $this;
+    }
+
+    public function setHelp($help)
+    {
+        $this->help = $help;
+
         return $this;
     }
 
     public function setPlaceholder($placeholder)
     {
         $this->placeholder = $placeholder;
+
         return $this;
     }
 
     public function render()
     {
-        return new HtmlString($this->view()->render());
+        return new HtmlString($this->view()
+                                   ->render());
     }
 
     public function error()
@@ -144,13 +165,16 @@ abstract class Element
 
     public function validate($keys)
     {
-        $values = request($keys);
+        $values    = request($keys);
         $validator = validator($values, [
             $this->name => $this->validators
         ]);
-        if ($validator->fails()) {
-            $errors = array_undot($validator->errors()->toArray());
+        if ($validator->fails())
+        {
+            $errors      = array_undot($validator->errors()
+                                                 ->toArray());
             $this->error = array_get($errors, $this->name . '.0');
+
             return false;
         }
 
@@ -159,9 +183,11 @@ abstract class Element
 
     public function setValue($value, $force = false)
     {
-        if ($force || !$this->hasOldValue) {
+        if ($force || !$this->hasOldValue)
+        {
             $this->value = $value;
         }
+
         return $this;
     }
 
