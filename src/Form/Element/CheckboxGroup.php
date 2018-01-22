@@ -35,4 +35,9 @@ class CheckboxGroup extends Element
 
         return $this;
     }
+
+    public function value()
+    {
+        return $this->value ? : [];
+    }
 }
