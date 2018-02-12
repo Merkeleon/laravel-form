@@ -32,7 +32,8 @@ class Html extends Element
     {
         return view('form::' . $this->theme . '.element.html', [
             'label'   => $this->label,
-            'content' => $this->content
+            'content' => $this->content,
+            'class'   => $this->class,
         ]);
     }
 }
