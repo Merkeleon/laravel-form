@@ -12,7 +12,7 @@ use Merkeleon\Form\Form\Element;
 
 class Submit extends Element
 {
-    protected $buttonClass = 'btn-primary';
+    protected $buttonClass = 'btn';
     protected $isIgnored   = true;
 
     public function setButtonClass($buttonClass)
