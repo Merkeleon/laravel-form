@@ -12,7 +12,8 @@ use Merkeleon\Form\Form\Element;
 
 class Checkbox extends Element
 {
-    protected $options = [];
+    protected $options  = [];
+    protected $nullable = false;
 
     public function view()
     {
@@ -25,12 +26,28 @@ class Checkbox extends Element
             'checked'     => $this->value,
             'options'     => $this->options,
             'class'       => $this->class,
-            'attributes'  => $this->attributes
+            'attributes'  => $this->attributes,
+            'nullable'    => $this->nullable,
         ]);
     }
 
     public function value()
     {
-        return $this->value ? 1 : 0;
+        $value = null;
+
+        if ($this->value) {
+            $value = 1;
+        } elseif (!$this->nullable) {
+            $value = 0;
+        }
+
+        return $value;
+    }
+
+    public function nullable($nullable = true)
+    {
+        $this->nullable = $nullable;
+        
+        return $this;
     }
 }
