@@ -12,20 +12,30 @@ use Merkeleon\Form\Form\Element;
 
 class Submit extends Element
 {
-    protected $isIgnored = true;
+    protected $buttonClass = 'btn';
+    protected $isIgnored   = true;
 
-    public function isClicked() {
+    public function setButtonClass($buttonClass)
+    {
+        $this->buttonClass = $buttonClass;
+
+        return $this;
+    }
+
+    public function isClicked()
+    {
         return (bool)$this->value();
     }
 
     public function view()
     {
-        return view('form::'.$this->theme.'.element.submit', [
-            'label' => $this->label,
-            'name' => $this->name,
+        return view('form::' . $this->theme . '.element.submit', [
+            'label'       => $this->label,
+            'name'        => $this->name,
             'elementName' => $this->elementName,
-            'class' => $this->class,
-            'attributes' => $this->attributes,
+            'class'       => $this->class,
+            'buttonClass' => $this->buttonClass,
+            'attributes'  => $this->attributes,
         ]);
     }
 

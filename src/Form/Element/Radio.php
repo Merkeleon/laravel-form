@@ -15,8 +15,10 @@ class Radio extends Element
 {
     protected $options = [];
 
-    public function setOptions($options) {
-        if ($options instanceof Collection) {
+    public function setOptions($options)
+    {
+        if ($options instanceof Collection)
+        {
             $options = $options->getDictionary();
         }
         $this->options = $options;
@@ -26,16 +28,17 @@ class Radio extends Element
 
     public function view()
     {
-        return view('form::'.$this->theme.'.element.radio', [
-            'label' => $this->label,
+        return view('form::' . $this->theme . '.element.radio', [
+            'label'       => $this->label,
             'placeholder' => $this->placeholder,
-            'name' => $this->name,
+            'name'        => $this->name,
+            'help'        => $this->help,
             'elementName' => $this->elementName,
-            'options' => $this->options,
-            'error' => $this->error,
-            'value' => $this->value,
-            'class' => $this->class,
-            'attributes' => $this->attributes
+            'options'     => $this->options,
+            'error'       => $this->error,
+            'value'       => $this->value,
+            'class'       => $this->class,
+            'attributes'  => $this->attributes
         ]);
     }
 

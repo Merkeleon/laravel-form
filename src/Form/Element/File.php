@@ -14,7 +14,8 @@ class File extends Element
 {
     protected $isMultiple = false;
 
-    public function setMultiple($multiple = true) {
+    public function setMultiple($multiple = true)
+    {
         $this->isMultiple = $multiple;
 
         return $this;
@@ -22,15 +23,16 @@ class File extends Element
 
     public function view()
     {
-        return view('form::'.$this->theme.'.element.file', [
-            'name' => $this->name,
+        return view('form::' . $this->theme . '.element.file', [
+            'name'        => $this->name,
+            'help'        => $this->help,
             'elementName' => $this->elementName,
-            'error' => $this->error,
-            'label' => $this->label,
+            'error'       => $this->error,
+            'label'       => $this->label,
             'placeholder' => $this->placeholder,
-            'class' => $this->class,
-            'multiple' => $this->isMultiple,
-            'attributes' => $this->attributes
+            'class'       => $this->class,
+            'multiple'    => $this->isMultiple,
+            'attributes'  => $this->attributes
         ]);
     }
 

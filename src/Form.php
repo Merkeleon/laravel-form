@@ -20,16 +20,16 @@ use Merkeleon\Form\Form\Element\Textarea;
 
 class Form
 {
-    private $method;
-    private $action;
-    private $theme;
-    private $class;
-    private $elements = [];
-    private $errors = [];
-    private $validated = false;
-    private $name = false;
-    private $isAjax = false;
-    private $enctype;
+    protected $method;
+    protected $action;
+    protected $theme;
+    protected $class;
+    protected $elements = [];
+    protected $errors = [];
+    protected $validated = false;
+    protected $name = false;
+    protected $isAjax = false;
+    protected $enctype;
 
     public function __construct()
     {
@@ -137,11 +137,39 @@ class Form
     /**
      * @param $name
      * @param string $validators
+     * @return \Merkeleon\Form\Form\Element\DateTime
+     */
+    public function addElementDateTime($name, $validators = '')
+    {
+        $element = new Element\DateTime($name, $validators);
+        $element->setTheme($this->theme);
+
+        $this->elements[$name] = $element;
+        return $this->elements[$name];
+    }
+
+    /**
+     * @param $name
+     * @param string $validators
      * @return \Merkeleon\Form\Form\Element\Date
      */
     public function addElementDate($name, $validators = '')
     {
         $element = new Element\Date($name, $validators);
+        $element->setTheme($this->theme);
+
+        $this->elements[$name] = $element;
+        return $this->elements[$name];
+    }
+
+    /**
+     * @param $name
+     * @param string $validators
+     * @return \Merkeleon\Form\Form\Element\Range
+     */
+    public function addElementRange($name, $validators = '')
+    {
+        $element = new Element\Range($name, $validators);
         $element->setTheme($this->theme);
 
         $this->elements[$name] = $element;
@@ -161,6 +189,22 @@ class Form
         $this->elements[$name] = $element;
         $this->enctype = 'multipart/form-data';
         
+        return $this->elements[$name];
+    }
+
+    /**
+     * @param $name
+     * @param string $view
+     * @param array $data
+     * @return \Merkeleon\Form\Form\Element\Delimiter
+     */
+    public function addElementDelimiter($name, $view = '', $data = [])
+    {
+        $element = new Element\Delimiter($name, '');
+        $element->setTheme($this->theme)
+            ->setContent($view, $data);
+
+        $this->elements[$name] = $element;
         return $this->elements[$name];
     }
 
@@ -345,12 +389,15 @@ class Form
         return $this->errors;
     }
 
-    public function values()
+    public function values($skipEmptyString = false)
     {
         $data = [];
         foreach ($this->elements as $name => $element) {
             if(!$element->isIgnored()) {
-                array_set($data, $name, $element->value());
+                $value = $element->value();
+                if (!$skipEmptyString || $skipEmptyString && $value !== '') {
+                    array_set($data, $name, $value);
+                }
             }
         }
 

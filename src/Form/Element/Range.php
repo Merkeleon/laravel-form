@@ -1,25 +1,22 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: codeator
- * Date: 28.04.16
- * Time: 11:33
- */
 
 namespace Merkeleon\Form\Form\Element;
 
 use Merkeleon\Form\Form\Element;
 
-class Hidden extends Element
+class Range extends Element
 {
-
     public function view()
     {
-        return view('form::' . $this->theme . '.element.hidden', [
+        return view('form::' . $this->theme . '.element.range', [
             'name'        => $this->name,
+            'help'        => $this->help,
             'elementName' => $this->elementName,
             'error'       => $this->error,
+            'label'       => $this->label,
             'value'       => $this->value,
+            'placeholder' => $this->placeholder,
+            'postfix'     => $this->postfix,
             'class'       => $this->class,
             'attributes'  => $this->attributes
         ]);
