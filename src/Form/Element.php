@@ -9,6 +9,7 @@
 namespace Merkeleon\Form\Form;
 
 use Illuminate\Support\HtmlString;
+use Merkeleon\Form\Form;
 
 abstract class Element
 {
@@ -26,8 +27,9 @@ abstract class Element
 
     protected $isIgnored   = false;
     protected $hasOldValue = false;
+    protected $form;
 
-    public function __construct($name, $validators = '')
+    public function __construct($name, $validators = '', Form $form = null)
     {
         $this->name        = $name;
         $this->elementName = self::prepareElementName($name);
@@ -40,7 +42,9 @@ abstract class Element
         $this->hasOldValue = $oldValue !== null;
         $this->value       = $oldValue;
         $this->error       = null;
-        if ($errors = session()->get('errors'))
+        $isFormSubmitted   = is_null($form) || $form->isSubmitted();
+        $errors            = session()->get('errors');
+        if ($isFormSubmitted && $errors)
         {
             $this->error = array_get(array_undot($errors->toArray()), $this->name, '');
             if (is_array($this->error))
