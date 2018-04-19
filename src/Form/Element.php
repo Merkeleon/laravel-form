@@ -34,12 +34,12 @@ abstract class Element
         $this->name        = $name;
         $this->elementName = self::prepareElementName($name);
         $this->validators  = $validators;
-        $oldValue          = request()->input($this->name, null);
-        if ($oldValue === null)
+        $oldValue          = request()->input($this->name, false);
+        if ($oldValue === false)
         {
-            $oldValue = request()->old($this->name, null);
+            $oldValue = request()->old($this->name, false);
         }
-        $this->hasOldValue = $oldValue !== null;
+        $this->hasOldValue = $oldValue !== false;
         $this->value       = $oldValue;
         $this->error       = null;
         $isFormSubmitted   = is_null($form) || $form->isSubmitted();
