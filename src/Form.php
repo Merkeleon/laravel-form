@@ -127,7 +127,7 @@ class Form
      */
     public function addElementText($name, $validators = '')
     {
-        $element = new Text($name, $validators);
+        $element = new Text($name, $validators, $this);
         $element->setTheme($this->theme);
 
         $this->elements[$name] = $element;
@@ -141,7 +141,7 @@ class Form
      */
     public function addElementDateTime($name, $validators = '')
     {
-        $element = new Element\DateTime($name, $validators);
+        $element = new Element\DateTime($name, $validators, $this);
         $element->setTheme($this->theme);
 
         $this->elements[$name] = $element;
@@ -155,7 +155,7 @@ class Form
      */
     public function addElementDate($name, $validators = '')
     {
-        $element = new Element\Date($name, $validators);
+        $element = new Element\Date($name, $validators, $this);
         $element->setTheme($this->theme);
 
         $this->elements[$name] = $element;
@@ -169,7 +169,7 @@ class Form
      */
     public function addElementRange($name, $validators = '')
     {
-        $element = new Element\Range($name, $validators);
+        $element = new Element\Range($name, $validators, $this);
         $element->setTheme($this->theme);
 
         $this->elements[$name] = $element;
@@ -183,7 +183,7 @@ class Form
      */
     public function addElementFile($name, $validators = '')
     {
-        $element = new Element\File($name, $validators);
+        $element = new Element\File($name, $validators, $this);
         $element->setTheme($this->theme);
 
         $this->elements[$name] = $element;
@@ -222,7 +222,7 @@ class Form
      */
     public function addElementHtml($name, $content = '')
     {
-        $element = new Element\Html($name, $content);
+        $element = new Element\Html($name, $content, $this);
 
         $element->setTheme($this->theme);
 
@@ -237,7 +237,7 @@ class Form
      */
     public function addElementTextarea($name, $validators = '')
     {
-        $element = new Textarea($name, $validators);
+        $element = new Textarea($name, $validators, $this);
         $element->setTheme($this->theme);
 
         $this->elements[$name] = $element;
@@ -251,7 +251,7 @@ class Form
      */
     public function addElementHidden($name, $validators = '')
     {
-        $element = new Hidden($name, $validators);
+        $element = new Hidden($name, $validators, $this);
         $element->setTheme($this->theme);
 
         $this->elements[$name] = $element;
@@ -265,7 +265,7 @@ class Form
      */
     public function addElementCheckbox($name, $validators = '')
     {
-        $element = new Checkbox($name, $validators);
+        $element = new Checkbox($name, $validators, $this);
         $element->setTheme($this->theme);
 
         $this->elements[$name] = $element;
@@ -279,7 +279,7 @@ class Form
      */
     public function addElementCheckboxGroup($name, $validators = '')
     {
-        $element = new Element\CheckboxGroup($name, $validators);
+        $element = new Element\CheckboxGroup($name, $validators, $this);
         $element->setTheme($this->theme);
 
         $this->elements[$name] = $element;
@@ -293,7 +293,7 @@ class Form
      */
     public function addElementPassword($name, $validators = '')
     {
-        $element = new Password($name, $validators);
+        $element = new Password($name, $validators, $this);
         $element->setTheme($this->theme);
 
         $this->elements[$name] = $element;
@@ -307,7 +307,7 @@ class Form
      */
     public function addElementSelect($name, $validators = '')
     {
-        $element = new Select($name, $validators);
+        $element = new Select($name, $validators, $this);
         $element->setTheme($this->theme);
 
         $this->elements[$name] = $element;
@@ -322,7 +322,7 @@ class Form
      */
     public function addElementRadio($name, $validators = '')
     {
-        $element = new Element\Radio($name, $validators);
+        $element = new Element\Radio($name, $validators, $this);
         $element->setTheme($this->theme);
 
         $this->elements[$name] = $element;
@@ -336,7 +336,7 @@ class Form
      */
     public function addElementSubmit($name = 'submit')
     {
-        $element = new Submit($name);
+        $element = new Submit($name, '', $this);
         $element->setTheme($this->theme);
 
         $this->elements[$name] = $element;
@@ -441,7 +441,7 @@ class Form
 
     private function setupFormName() {
         if (!$this->name) {
-            $this->name = md5(implode('.', array_keys($this->elements)));
+            $this->name = md5(get_class($this));
         }
     }
 
