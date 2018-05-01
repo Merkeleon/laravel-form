@@ -63,6 +63,32 @@ class Select extends Element
         return parent::setValue($value, $force);
     }
 
+    public function validate($keys)
+    {
+        if (!$this->multiple)
+        {
+            return parent::validate($keys);
+        }
+
+        $values    = request($keys);
+
+        $validator = validator($values, [
+            $this->name.'.*' => $this->validators
+        ]);
+
+        if ($validator->fails())
+        {
+            $errors = $validator->errors()
+                                ->toArray();
+
+            $this->error = array_first($errors);
+
+            return false;
+        }
+
+        return true;
+    }
+
     public function view()
     {
         if ($this->multiple && !is_array($this->value))
