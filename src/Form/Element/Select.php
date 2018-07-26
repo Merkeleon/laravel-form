@@ -13,16 +13,22 @@ use Merkeleon\Form\Form\Element;
 
 class Select extends Element
 {
-    protected $options  = [];
-    protected $multiple = false;
+    protected $options           = [];
+    protected $optionsAttributes = [];
+    protected $multiple          = false;
 
-    public function setOptions($options)
+    public function setOptions($options, $attributes = null)
     {
         if ($options instanceof Collection)
         {
             $options = $options->getDictionary();
         }
         $this->options = $options;
+
+        if ($attributes)
+        {
+            $this->optionsAttributes = $attributes;
+        }
 
         return $this;
     }
@@ -97,17 +103,18 @@ class Select extends Element
         }
 
         return view('form::' . $this->theme . '.element.select', [
-            'label'       => $this->label,
-            'help'        => $this->help,
-            'placeholder' => $this->placeholder,
-            'name'        => $this->name,
-            'elementName' => $this->elementName,
-            'options'     => $this->options,
-            'error'       => $this->error,
-            'value'       => $this->value,
-            'multiple'    => $this->multiple,
-            'class'       => $this->class,
-            'attributes'  => $this->attributes
+            'label'             => $this->label,
+            'help'              => $this->help,
+            'placeholder'       => $this->placeholder,
+            'name'              => $this->name,
+            'elementName'       => $this->elementName,
+            'options'           => $this->options,
+            'optionsAttributes' => $this->optionsAttributes,
+            'error'             => $this->error,
+            'value'             => $this->value,
+            'multiple'          => $this->multiple,
+            'class'             => $this->class,
+            'attributes'        => $this->attributes
         ]);
     }
 

@@ -6,7 +6,7 @@
                 @foreach($attributes as $attributeName => $attributeValue) {{$attributeName}}="{{$attributeValue}}" @endforeach
         >
             @foreach($options as $key => $option)
-                <option value="{{$key}}"
+                <option value="{{$key}}" @if (array_get($optionsAttributes, $key)) {{array_get($optionsAttributes, $key)}} @endif
                         @if (($multiple && $value && in_array((string)$key, $value, true)) || $value === (string)$key) selected="selected" @endif>{{ $option }}</option>
             @endforeach
         </select>
