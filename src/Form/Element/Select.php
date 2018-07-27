@@ -17,7 +17,7 @@ class Select extends Element
     protected $optionsAttributes = [];
     protected $multiple          = false;
 
-    public function setOptions($options, $attributes = null)
+    public function setOptions($options, $attributes = [])
     {
         if ($options instanceof Collection)
         {
@@ -25,10 +25,7 @@ class Select extends Element
         }
         $this->options = $options;
 
-        if ($attributes)
-        {
-            $this->optionsAttributes = $attributes;
-        }
+        $this->optionsAttributes = $attributes;
 
         return $this;
     }
