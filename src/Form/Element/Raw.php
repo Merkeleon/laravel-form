@@ -30,7 +30,7 @@ class Raw extends Element
 
     public function view()
     {
-        return view('form::' . $this->theme . '.element.html', [
+        return view('form::' . $this->theme . '.element.raw', [
             'label'   => $this->label,
             'content' => $this->content,
             'class'   => $this->class,
