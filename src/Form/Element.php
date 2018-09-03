@@ -136,6 +136,11 @@ abstract class Element
         return $this;
     }
 
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
     public function setHelp($help)
     {
         $this->help = $help;
