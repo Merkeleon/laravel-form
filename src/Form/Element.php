@@ -41,7 +41,7 @@ abstract class Element
         {
             $oldValue = request()->old($this->name, false);
         }
-        $this->hasOldValue = $oldValue !== false;
+        $this->hasOldValue = $isFormSubmitted && $oldValue !== false;
         $this->error       = null;
         $errors            = session()->get('errors');
 
