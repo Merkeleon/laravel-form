@@ -462,4 +462,9 @@ class Form
         }
     }
 
+    public function getValidator()
+    {
+        return validator();
+    }
+
 }
