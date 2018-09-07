@@ -31,6 +31,7 @@ abstract class Element
 
     public function __construct($name, $validators = '', Form $form = null)
     {
+        $this->form        = $form;
         $isFormSubmitted   = is_null($form) || $form->isSubmitted();
 
         $this->name        = $name;
@@ -180,10 +181,14 @@ abstract class Element
 
     public function validate($keys)
     {
+        $validator = $this->form ? $this->form->getValidator() : validator();
         $values    = request($keys);
-        $validator = validator($values, [
+
+        $validator = $validator->setData($values);
+        $validator = $validator->setRules([
             $this->name => $this->validators
         ]);
+
         if ($validator->fails())
         {
             $errors      = array_undot($validator->errors()
