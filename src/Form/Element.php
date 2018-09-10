@@ -181,7 +181,7 @@ abstract class Element
 
     public function validate($keys)
     {
-        $validator = $this->form ? $this->form->getValidator() : validator();
+        $validator = $this->form ? $this->form->getValidator() : validator()->make([], []);
         $values    = request($keys);
 
         $validator = $validator->setData($values);
