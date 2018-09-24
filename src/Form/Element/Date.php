@@ -16,7 +16,7 @@ class Date extends Element
 
     public function value()
     {
-        if ($this->value === '')
+        if (empty($this->value))
         {
             $value = null;
         }
