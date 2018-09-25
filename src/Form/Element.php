@@ -73,6 +73,13 @@ abstract class Element
         return $this;
     }
 
+    public function disable()
+    {
+        $this->addAttributes(['disabled' => 'disabled']);
+
+        return $this;
+    }
+
     public function setPostfix($postfix)
     {
         $this->postfix = $postfix;

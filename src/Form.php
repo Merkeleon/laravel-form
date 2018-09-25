@@ -30,6 +30,7 @@ class Form
     protected $name = false;
     protected $isAjax = false;
     protected $enctype;
+    protected $disabled = false;
 
     public function __construct()
     {
@@ -77,11 +78,30 @@ class Form
         ]);
     }
 
+    public function disable()
+    {
+        $this->disabled = true;
+
+        return $this;
+    }
+
     public function render()
     {
         $this->setupFormName();
+        $this->checkDisabled();
         $this->addElementHidden($this->name)->setValue($this->name);
         return new HtmlString($this->view()->render());
+    }
+
+    public function checkDisabled()
+    {
+        if ($this->disabled)
+        {
+            foreach ($this->elements as $element)
+            {
+                $element->disable();
+            }
+        }
     }
 
     public function isSubmitted() {
