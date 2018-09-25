@@ -90,6 +90,11 @@ class Form
         return $this;
     }
 
+    public function isDisabled()
+    {
+        return $this->disabled;
+    }
+
     public function render()
     {
         $this->setupFormName();
