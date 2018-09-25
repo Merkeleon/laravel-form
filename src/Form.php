@@ -24,13 +24,13 @@ class Form
     protected $action;
     protected $theme;
     protected $class;
-    protected $elements = [];
-    protected $errors = [];
+    protected $elements  = [];
+    protected $errors    = [];
     protected $validated = false;
-    protected $name = false;
-    protected $isAjax = false;
+    protected $name      = false;
+    protected $isAjax    = false;
     protected $enctype;
-    protected $disabled = false;
+    protected $disabled  = false;
 
     public function __construct()
     {
@@ -45,23 +45,28 @@ class Form
     public function method($method = null)
     {
         $this->method = $method;
+
         return $this;
     }
 
     public function isAjax($isAjax)
     {
         $this->isAjax = $isAjax;
+
         return $this;
     }
 
     public function route($routeName, $parameters = [])
     {
         $this->action = route($routeName, $parameters);
+
         return $this;
     }
 
-    public function action($action) {
+    public function action($action)
+    {
         $this->action = $action;
+
         return $this;
     }
 
@@ -69,12 +74,12 @@ class Form
     {
         return view('form::' . $this->theme . '.form', [
             'elements' => $this->elements,
-            'method' => $this->method,
-            'action' => $this->action,
-            'name' => $this->name,
-            'class' => $this->class,
-            'isAjax' => $this->isAjax,
-            'enctype' => $this->enctype,
+            'method'   => $this->method,
+            'action'   => $this->action,
+            'name'     => $this->name,
+            'class'    => $this->class,
+            'isAjax'   => $this->isAjax,
+            'enctype'  => $this->enctype,
         ]);
     }
 
@@ -88,23 +93,28 @@ class Form
     public function render()
     {
         $this->setupFormName();
-        $this->checkDisabled();
-        $this->addElementHidden($this->name)->setValue($this->name);
-        return new HtmlString($this->view()->render());
+        $this->disableIfNeeded();
+        $this->addElementHidden($this->name)
+             ->setValue($this->name);
+
+        return new HtmlString($this->view()
+                                   ->render());
     }
 
-    public function checkDisabled()
+    public function disableIfNeeded()
     {
         if ($this->disabled)
         {
             foreach ($this->elements as $element)
             {
-                $element->disable();
+                $element->setDisabled(true)
+                        ->setIgnored(true);
             }
         }
     }
 
-    public function isSubmitted() {
+    public function isSubmitted()
+    {
         $this->setupFormName();
 
         return request()->has($this->name) || old($this->name);
@@ -113,30 +123,35 @@ class Form
     public function setTranslationMask($translationMask = '')
     {
         $this->translationMask = $translationMask;
+
         return $this;
     }
 
     public function setPlaceholderTranslationMask($placeholderTranslationMask = '')
     {
         $this->placeholderTranslationMask = $placeholderTranslationMask;
+
         return $this;
     }
 
     public function setName($name = '')
     {
         $this->name = $name;
+
         return $this;
     }
 
     public function setClass($class = '')
     {
         $this->class = $class;
+
         return $this;
     }
 
     public function addClass($class)
     {
         $this->class .= ' ' . $class;
+
         return $this;
     }
 
@@ -151,6 +166,7 @@ class Form
         $element->setTheme($this->theme);
 
         $this->elements[$name] = $element;
+
         return $this->elements[$name];
     }
 
@@ -165,6 +181,7 @@ class Form
         $element->setTheme($this->theme);
 
         $this->elements[$name] = $element;
+
         return $this->elements[$name];
     }
 
@@ -179,6 +196,7 @@ class Form
         $element->setTheme($this->theme);
 
         $this->elements[$name] = $element;
+
         return $this->elements[$name];
     }
 
@@ -193,6 +211,7 @@ class Form
         $element->setTheme($this->theme);
 
         $this->elements[$name] = $element;
+
         return $this->elements[$name];
     }
 
@@ -207,8 +226,8 @@ class Form
         $element->setTheme($this->theme);
 
         $this->elements[$name] = $element;
-        $this->enctype = 'multipart/form-data';
-        
+        $this->enctype         = 'multipart/form-data';
+
         return $this->elements[$name];
     }
 
@@ -222,15 +241,17 @@ class Form
     {
         $element = new Element\Delimiter($name, '');
         $element->setTheme($this->theme)
-            ->setContent($view, $data);
+                ->setContent($view, $data);
 
         $this->elements[$name] = $element;
+
         return $this->elements[$name];
     }
 
     public function addElement(Element $element)
     {
         $this->elements[$element->getName()] = $element;
+
         return $this->elements[$element->getName()];
     }
 
@@ -247,6 +268,7 @@ class Form
         $element->setTheme($this->theme);
 
         $this->elements[$name] = $element;
+
         return $this->elements[$name];
     }
 
@@ -261,6 +283,7 @@ class Form
         $element->setTheme($this->theme);
 
         $this->elements[$name] = $element;
+
         return $this->elements[$name];
     }
 
@@ -275,6 +298,7 @@ class Form
         $element->setTheme($this->theme);
 
         $this->elements[$name] = $element;
+
         return $this->elements[$name];
     }
 
@@ -289,6 +313,7 @@ class Form
         $element->setTheme($this->theme);
 
         $this->elements[$name] = $element;
+
         return $this->elements[$name];
     }
 
@@ -303,6 +328,7 @@ class Form
         $element->setTheme($this->theme);
 
         $this->elements[$name] = $element;
+
         return $this->elements[$name];
     }
 
@@ -317,6 +343,7 @@ class Form
         $element->setTheme($this->theme);
 
         $this->elements[$name] = $element;
+
         return $this->elements[$name];
     }
 
@@ -360,6 +387,7 @@ class Form
         $element->setTheme($this->theme);
 
         $this->elements[$name] = $element;
+
         return $this->elements[$name];
     }
 
@@ -371,26 +399,34 @@ class Form
 
     public function getElements($names = null)
     {
-        if ($names === null) {
+        if ($names === null)
+        {
             return $this->elements;
         }
-        if (!is_array($names)) {
+        if (!is_array($names))
+        {
             $names = func_get_args();
         }
+
         return array_only($this->elements, $names);
     }
 
     public function validate($force = false)
     {
-        if(!$this->isSubmitted() && !$force) {
+        if (!$this->isSubmitted() && !$force)
+        {
             return false;
         }
 
-        if (!$this->validated) {
+        if (!$this->validated)
+        {
             $keys = array_keys($this->elements);
-            foreach ($this->elements as $name => $element) {
-                if(!$element->isIgnored()) {
-                    if (!$element->validate($keys)) {
+            foreach ($this->elements as $name => $element)
+            {
+                if (!$element->isIgnored())
+                {
+                    if (!$element->validate($keys))
+                    {
                         array_set($this->errors, $name, $element->error());
                     }
                 }
@@ -403,19 +439,24 @@ class Form
 
     public function errors()
     {
-        if (!$this->validated) {
+        if (!$this->validated)
+        {
             $this->validate();
         }
+
         return $this->errors;
     }
 
     public function values($skipEmptyString = false)
     {
         $data = [];
-        foreach ($this->elements as $name => $element) {
-            if(!$element->isIgnored()) {
+        foreach ($this->elements as $name => $element)
+        {
+            if (!$element->isIgnored())
+            {
                 $value = $element->value();
-                if (!$skipEmptyString || $skipEmptyString && $value !== '') {
+                if (!$skipEmptyString || $skipEmptyString && $value !== '')
+                {
                     array_set($data, $name, $value);
                 }
             }
@@ -431,10 +472,12 @@ class Form
 
     public function setValues($values = [])
     {
-        foreach ($this->elements as $name => $element) {
+        foreach ($this->elements as $name => $element)
+        {
             $value = array_get($values, $name);
 
-            if ($value !== null) {
+            if ($value !== null)
+            {
                 $element->setValue($value);
             }
         }
@@ -445,22 +488,32 @@ class Form
     public function setTheme($theme = '')
     {
         $this->theme = $theme;
+
         return $this;
     }
 
     public function redirectToRoute($route, $attributes = [])
     {
-        return redirect()->route($route, $attributes)->withErrors($this->errors)->withInput();
+        return redirect()
+            ->route($route, $attributes)
+            ->withErrors($this->errors)
+            ->withInput();
     }
 
-    public function redirectBack($additionalErrors = []) {
+    public function redirectBack($additionalErrors = [])
+    {
         $errors = array_merge($additionalErrors, $this->errors());
 
-        return redirect()->back()->withErrors($errors)->withInput();
+        return redirect()
+            ->back()
+            ->withErrors($errors)
+            ->withInput();
     }
 
-    private function setupFormName() {
-        if (!$this->name) {
+    private function setupFormName()
+    {
+        if (!$this->name)
+        {
             $this->name = md5(get_class($this));
         }
     }

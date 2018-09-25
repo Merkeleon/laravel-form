@@ -26,6 +26,7 @@ abstract class Element
     protected $attributes = [];
 
     protected $isIgnored   = false;
+    protected $isDisabled  = false;
     protected $hasOldValue = false;
     protected $form;
 
@@ -73,9 +74,9 @@ abstract class Element
         return $this;
     }
 
-    public function disable()
+    public function setDisabled($isDisabled = true)
     {
-        $this->addAttributes(['disabled' => 'disabled']);
+        $this->isDisabled = $isDisabled;
 
         return $this;
     }
@@ -153,8 +154,20 @@ abstract class Element
 
     public function render()
     {
+        $this->disableIfNeeded();
+
         return new HtmlString($this->view()
                                    ->render());
+    }
+
+    public function disableIfNeeded()
+    {
+        if ($this->isDisabled)
+        {
+            $this->addAttributes(['disabled' => 'disabled']);
+        }
+
+        return $this;
     }
 
     public function error()
