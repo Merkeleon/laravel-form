@@ -441,6 +441,8 @@ class Form
                     }
                 }
             }
+
+            $this->errors = array_dot($this->errors);
             $this->validated = true;
         }
 
