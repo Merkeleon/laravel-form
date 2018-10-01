@@ -162,7 +162,7 @@ abstract class Element
 
     public function disableIfNeeded()
     {
-        if ($this->isDisabled)
+        if ($this->isDisabled || $this->form->isDisabled())
         {
             $this->addAttributes(['disabled' => 'disabled']);
         }
