@@ -83,9 +83,9 @@ class Form
         ]);
     }
 
-    public function disable()
+    public function disable($disabled = true)
     {
-        $this->disabled = true;
+        $this->disabled = $disabled;
 
         return $this;
     }
@@ -93,6 +93,11 @@ class Form
     public function isDisabled()
     {
         return $this->disabled;
+    }
+
+    public function isEnabled()
+    {
+        return !$this->disabled;
     }
 
     public function render()
