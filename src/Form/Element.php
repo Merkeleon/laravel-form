@@ -74,6 +74,14 @@ abstract class Element
         return $result;
     }
 
+    public function disable($disable = true)
+    {
+        $this->setDisabled($disable)
+             ->setIgnored($disable);
+
+        return $this;
+    }
+
     public function setIgnored($isIgnored)
     {
         $this->isIgnored = $isIgnored;

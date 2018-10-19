@@ -117,8 +117,7 @@ class Form
         {
             foreach ($this->elements as $element)
             {
-                $element->setDisabled(true)
-                        ->setIgnored(true);
+                $element->disable();
             }
         }
     }
