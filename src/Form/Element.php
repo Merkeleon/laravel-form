@@ -67,10 +67,10 @@ abstract class Element
         return $result;
     }
 
-    public function disable($bool = true)
+    public function disable($disable = true)
     {
-        $this->setDisabled($bool)
-             ->setIgnored($bool);
+        $this->setDisabled($disable)
+             ->setIgnored($disable);
 
         return $this;
     }
@@ -82,7 +82,7 @@ abstract class Element
         return $this;
     }
 
-    public function setDisabled($isDisabled)
+    public function setDisabled($isDisabled = true)
     {
         $this->isDisabled = $isDisabled;
 
