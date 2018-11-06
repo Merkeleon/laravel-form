@@ -40,7 +40,9 @@ class Date extends Element
 
     public function view()
     {
-        $this->addAttributes(['data-toggle' => 'datepicker']);
+        $this->addAttributes([
+            'data-toggle' => 'date-picker',
+        ]);
 
         return view('form::' . $this->theme . '.element.text', [
             'name'        => $this->name,

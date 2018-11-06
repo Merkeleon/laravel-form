@@ -35,7 +35,10 @@ class DateTime extends Element
 
     public function view()
     {
-        $this->addAttributes(['data-toggle' => 'datetimepicker']);
+        $this->addAttributes([
+            'data-toggle'      => 'date-picker',
+            'data-enable-time' => 'true',
+        ]);
 
         return view('form::' . $this->theme . '.element.text', [
             'name'        => $this->name,
