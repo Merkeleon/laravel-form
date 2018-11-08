@@ -8,31 +8,6 @@ use Merkeleon\Form\Form\Element;
 class DateTime extends Element
 {
 
-    public function value()
-    {
-        if (empty($this->value))
-        {
-            $value = null;
-        }
-        else
-        {
-            $value = Carbon::parse($this->value);
-        }
-
-        return $value;
-    }
-
-    public function setValue($value, $force = false)
-    {
-        if ($force || !$this->hasOldValue)
-        {
-            $this->value = Carbon::parse($value);
-        }
-
-        return $this;
-    }
-
-
     public function view()
     {
         $this->addAttributes([
