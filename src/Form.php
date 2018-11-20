@@ -280,7 +280,24 @@ class Form
 
         return $this->elements[$name];
     }
+    
+    
+    /**
+     * @param $name
+     * @param string $content
+     * @return \Merkeleon\Form\Form\Element\Raw
+     */
+    public function addElementRaw($name, $content = '')
+    {
+        $element = new Element\Raw($name, $content, $this);
 
+        $element->setTheme($this->theme);
+
+        $this->elements[$name] = $element;
+        return $this->elements[$name];
+    }
+
+    
     /**
      * @param $name
      * @param string $validators
@@ -527,6 +544,11 @@ class Form
         {
             $this->name = md5(get_class($this));
         }
+    }
+
+    public function getValidator()
+    {
+        return validator()->make([], []);
     }
 
 }

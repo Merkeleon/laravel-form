@@ -32,6 +32,9 @@ abstract class Element
 
     public function __construct($name, $validators = '', Form $form = null)
     {
+        $this->form        = $form;
+        $isFormSubmitted   = is_null($form) || $form->isSubmitted();
+
         $this->name        = $name;
         $this->elementName = self::prepareElementName($name);
         $this->validators  = $validators;
@@ -40,17 +43,21 @@ abstract class Element
         {
             $oldValue = request()->old($this->name, false);
         }
-        $this->hasOldValue = $oldValue !== false;
-        $this->value       = $oldValue;
+        $this->hasOldValue = $isFormSubmitted && $oldValue !== false;
         $this->error       = null;
-        $isFormSubmitted   = is_null($form) || $form->isSubmitted();
         $errors            = session()->get('errors');
-        if ($isFormSubmitted && $errors)
+
+        if ($isFormSubmitted)
         {
-            $this->error = array_get(array_undot($errors->toArray()), $this->name, '');
-            if (is_array($this->error))
+            $this->value = $oldValue;
+
+            if ($errors)
             {
-                $this->error = array_first($this->error);
+                $this->error = array_get(array_undot($errors->toArray()), $this->name, '');
+                if (is_array($this->error))
+                {
+                    $this->error = array_first($this->error);
+                }
             }
         }
     }
@@ -146,6 +153,11 @@ abstract class Element
         return $this;
     }
 
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
     public function setHelp($help)
     {
         $this->help = $help;
@@ -200,10 +212,14 @@ abstract class Element
 
     public function validate($keys)
     {
+        $validator = $this->form ? $this->form->getValidator() : validator()->make([], []);
         $values    = request($keys);
-        $validator = validator($values, [
+
+        $validator = $validator->setData($values);
+        $validator = $validator->setRules([
             $this->name => $this->validators
         ]);
+
         if ($validator->fails())
         {
             $errors      = array_undot($validator->errors()

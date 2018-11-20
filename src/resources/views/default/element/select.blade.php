@@ -7,7 +7,11 @@
         >
             @foreach($options as $key => $option)
                 <option value="{{$key}}"
-                        @if (($multiple && $value && in_array((string)$key, $value, true)) || $value === (string)$key) selected="selected" @endif>{{ $option }}</option>
+                    @if($optionAttributes = array_get($optionsAttributes, $key))
+                        @foreach($optionAttributes as $optionAttributeName => $optionAttributeValue) {{$optionAttributeName}}="{{$optionAttributeValue}}" @endforeach
+                    @endif
+                    @if (($multiple && $value && in_array((string)$key, $value, true)) || $value === (string)$key) selected="selected" @endif>{{ $option }}
+                </option>
             @endforeach
         </select>
             <div class="form__help">{{ $help }}</div>
