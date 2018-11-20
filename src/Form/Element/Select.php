@@ -13,9 +13,11 @@ use Merkeleon\Form\Form\Element;
 
 class Select extends Element
 {
+
     protected $options           = [];
-    protected $optionsAttributes = [];
     protected $multiple          = false;
+    protected $emptyFirst        = false;
+    protected $optionsAttributes = [];
 
     public function setOptions($options, $attributes = [])
     {
@@ -28,6 +30,11 @@ class Select extends Element
         $this->optionsAttributes = $attributes;
 
         return $this;
+    }
+
+    public function addEmptyFirst($trans = '')
+    {
+        $this->emptyFirst = $trans;
     }
 
     public function setMultiple($multiple)
@@ -94,6 +101,11 @@ class Select extends Element
 
     public function view()
     {
+        if ($this->emptyFirst !== false)
+        {
+            $this->options = ['' => $this->emptyFirst] + $this->options;
+        }
+
         if ($this->multiple && !is_array($this->value))
         {
             $this->value = empty($this->value) ? [] : [$this->value];
