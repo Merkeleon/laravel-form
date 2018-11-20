@@ -15,6 +15,7 @@ class Select extends Element
 {
     protected $options  = [];
     protected $multiple = false;
+    protected $emptyFirst = false;
 
     public function setOptions($options)
     {
@@ -25,6 +26,11 @@ class Select extends Element
         $this->options = $options;
 
         return $this;
+    }
+
+    public function addEmptyFirst($trans = '')
+    {
+        $this->emptyFirst = $trans;
     }
 
     public function setMultiple($multiple)
@@ -91,6 +97,11 @@ class Select extends Element
 
     public function view()
     {
+        if ($this->emptyFirst !== false)
+        {
+            $this->options = ['' => $this->emptyFirst] + $this->options;
+        }
+
         if ($this->multiple && !is_array($this->value))
         {
             $this->value = empty($this->value) ? [] : [$this->value];
