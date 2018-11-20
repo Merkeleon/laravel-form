@@ -35,6 +35,8 @@ class Select extends Element
     public function addEmptyFirst($trans = '')
     {
         $this->emptyFirst = $trans;
+        
+        return $this;
     }
 
     public function setMultiple($multiple)
