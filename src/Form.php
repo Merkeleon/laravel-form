@@ -439,7 +439,7 @@ class Form
 
     public function validate($force = false)
     {
-        if (!$this->isSubmitted() && !$force)
+        if ($this->isDisabled() || (!$force && !$this->isSubmitted()))
         {
             return false;
         }
