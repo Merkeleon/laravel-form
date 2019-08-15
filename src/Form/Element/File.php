@@ -36,4 +36,29 @@ class File extends Element
         ]);
     }
 
+    public function validate($keys)
+    {
+        if (!$this->isMultiple)
+        {
+            return parent::validate($keys);
+        }
+
+        $values    = request($keys);
+        $validator = validator($values, [
+            $this->name . '.*' => $this->validators
+        ]);
+
+        if ($validator->fails())
+        {
+            $errors = $validator->errors()
+                                ->toArray();
+
+            $this->error = array_first($errors);
+
+            return false;
+        }
+
+        return true;
+    }
+
 }
