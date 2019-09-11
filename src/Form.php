@@ -24,13 +24,14 @@ class Form
     protected $action;
     protected $theme;
     protected $class;
-    protected $elements  = [];
-    protected $errors    = [];
-    protected $validated = false;
-    protected $name      = false;
-    protected $isAjax    = false;
+    protected $elements                = [];
+    protected $errors                  = [];
+    protected $validated               = false;
+    protected $name                    = false;
+    protected $isAjax                  = false;
     protected $enctype;
-    protected $disabled  = false;
+    protected $disabled                = false;
+    protected $useLabelAsAttributeName = false;
 
     public function __construct()
     {
@@ -162,6 +163,18 @@ class Form
         $this->class .= ' ' . $class;
 
         return $this;
+    }
+
+    public function useLabelAsAttributeName($useLabelAsAttributeName = true)
+    {
+        $this->useLabelAsAttributeName = $useLabelAsAttributeName;
+
+        return $this;
+    }
+
+    public function isUseLabelAsAttributeName()
+    {
+        return $this->useLabelAsAttributeName;
     }
 
     /**

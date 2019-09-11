@@ -212,6 +212,12 @@ abstract class Element
         $values    = request($keys);
 
         $validator = $validator->setData($values);
+        
+        if ($this->form && $this->form->isUseLabelAsAttributeName() && $this->label)
+        {
+            $validator->setAttributeNames([$this->name => $this->label]);
+        }
+
         $validator = $validator->setRules([
             $this->name => $this->validators
         ]);
